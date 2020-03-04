@@ -148,7 +148,7 @@ CREATE TABLE board
     title        VARCHAR2(60)     NOT NULL, 
     content      VARCHAR2(100)    NOT NULL, 
     writedate    DATE             NOT NULL, 
-    cnt          INT              NULL, 
+    cnt          INT              NOT NULL, 
     CONSTRAINT BOARD_PK PRIMARY KEY (board_id)
 )
 /
@@ -669,8 +669,9 @@ ALTER TABLE customer_m
 # 시퀀스 생성
 
 ```
-create sequence seq_board_board_id increment by 1 start with 1;
-
+drop sequence board_SEQ;//자동생성 시퀀스 삭제
+create sequence board_seq increment by 1 start with 1;
+commit;
 ```
 
 
