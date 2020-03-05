@@ -35,7 +35,7 @@ DROP TABLE "CUSTOMER_M" CASCADE CONSTRAINTS;
 # 프로젝트 테이블 생성 SQL문
 
 ```sql
--- 테이블 순서는 관계를 고려하여 한 번에 실행해도 에러가 발생하지 않게 정렬되었습니다.
+-- jung 0305 테이블 생성
 
 -- area Table Create SQL
 CREATE TABLE area
@@ -154,7 +154,7 @@ COMMENT ON COLUMN manager.mana_pw IS '관리자 비밀번호'
 -- area Table Create SQL
 CREATE TABLE service
 (
-    serv_id        INT             NOT NULL, 
+    serv_id        VARCHAR2(60)    NOT NULL, 
     serv_coname    VARCHAR2(60)    NOT NULL, 
     CONSTRAINT SERVICE_PK PRIMARY KEY (serv_id)
 )
@@ -264,15 +264,15 @@ ALTER TABLE apartment
 -- area Table Create SQL
 CREATE TABLE store
 (
-    serv_id            INT    NOT NULL, 
-    q_id               INT    NOT NULL, 
-    area_id            INT    NOT NULL, 
-    store_num          INT    NOT NULL, 
-    sim_store_num      INT    NOT NULL, 
-    start_rate         INT    NOT NULL, 
-    start_store_num    INT    NOT NULL, 
-    close_rate         INT    NOT NULL, 
-    close_store_num    INT    NOT NULL, 
+    serv_id            VARCHAR2(60)    NOT NULL, 
+    q_id               INT             NOT NULL, 
+    area_id            INT             NOT NULL, 
+    store_num          INT             NOT NULL, 
+    sim_store_num      INT             NOT NULL, 
+    start_rate         INT             NOT NULL, 
+    start_store_num    INT             NOT NULL, 
+    close_rate         INT             NOT NULL, 
+    close_store_num    INT             NOT NULL, 
     CONSTRAINT STORE_PK PRIMARY KEY (serv_id, q_id, area_id)
 )
 /
@@ -349,31 +349,31 @@ ALTER TABLE job
 -- area Table Create SQL
 CREATE TABLE sales
 (
-    area_id            INT    NOT NULL, 
-    serv_id            INT    NOT NULL, 
-    q_id               INT    NOT NULL, 
-    month_sal_money    INT    NOT NULL, 
-    month_sal_num      INT    NOT NULL, 
-    wday_sal_money     INT    NOT NULL, 
-    wkend_sal_money    INT    NOT NULL, 
-    m_sal_money        INT    NOT NULL, 
-    w_sal_money        INT    NOT NULL, 
-    10_sal_money       INT    NOT NULL, 
-    20_sal_money       INT    NOT NULL, 
-    30_sal_money       INT    NOT NULL, 
-    40_sal_money       INT    NOT NULL, 
-    50_sal_money       INT    NOT NULL, 
-    60_sal_money       INT    NOT NULL, 
-    wday_sal_num       INT    NOT NULL, 
-    wkend_sal_num      INT    NOT NULL, 
-    m_sal_num          INT    NOT NULL, 
-    w_sal_num          INT    NOT NULL, 
-    10_sal_num         INT    NOT NULL, 
-    20_sal_num         INT    NOT NULL, 
-    30_sal_num         INT    NOT NULL, 
-    40_sal_num         INT    NOT NULL, 
-    50_sal_num         INT    NOT NULL, 
-    60_sal_num         INT    NOT NULL, 
+    area_id            INT             NOT NULL, 
+    serv_id            VARCHAR2(60)    NOT NULL, 
+    q_id               INT             NOT NULL, 
+    month_sal_money    INT             NOT NULL, 
+    month_sal_num      INT             NOT NULL, 
+    wday_sal_money     INT             NOT NULL, 
+    wkend_sal_money    INT             NOT NULL, 
+    m_sal_money        INT             NOT NULL, 
+    w_sal_money        INT             NOT NULL, 
+    10_sal_money       INT             NOT NULL, 
+    20_sal_money       INT             NOT NULL, 
+    30_sal_money       INT             NOT NULL, 
+    40_sal_money       INT             NOT NULL, 
+    50_sal_money       INT             NOT NULL, 
+    60_sal_money       INT             NOT NULL, 
+    wday_sal_num       INT             NOT NULL, 
+    wkend_sal_num      INT             NOT NULL, 
+    m_sal_num          INT             NOT NULL, 
+    w_sal_num          INT             NOT NULL, 
+    10_sal_num         INT             NOT NULL, 
+    20_sal_num         INT             NOT NULL, 
+    30_sal_num         INT             NOT NULL, 
+    40_sal_num         INT             NOT NULL, 
+    50_sal_num         INT             NOT NULL, 
+    60_sal_num         INT             NOT NULL, 
     CONSTRAINT SALES_PK PRIMARY KEY (area_id, serv_id, q_id)
 )
 /
@@ -694,7 +694,7 @@ ALTER TABLE customer_m
 # 시퀀스 생성
 
 ```
-ㄴdrop sequence board_SEQ;//자동생성 시퀀스 삭제
+drop sequence board_SEQ;//자동생성 시퀀스 삭제
 create sequence board_seq increment by 1 start with 1;
 commit;
 ```
