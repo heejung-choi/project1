@@ -4,9 +4,38 @@ id flower
 
 password flower
 
+
+
+# 모든 테이블 삭제하고 싶을 때
+
+```sql
+-- jung 0304 이건 실행하면 안되고 테이블 모두 삭제하고 싶을 때 사용하기
+SELECT 'DROP TABLE "' || TABLE_NAME || '" CASCADE CONSTRAINTS;' FROM user_tables;
+DROP TABLE "AREA" CASCADE CONSTRAINTS;
+DROP TABLE "QUARTER" CASCADE CONSTRAINTS;
+DROP TABLE "CUSTOMER" CASCADE CONSTRAINTS;
+DROP TABLE "MANAGER" CASCADE CONSTRAINTS;
+DROP TABLE "SERVICE" CASCADE CONSTRAINTS;
+DROP TABLE "BOARD" CASCADE CONSTRAINTS;
+DROP TABLE "LIVING_POPULATION" CASCADE CONSTRAINTS;
+DROP TABLE "APARTMENT" CASCADE CONSTRAINTS;
+DROP TABLE "STORE" CASCADE CONSTRAINTS;
+DROP TABLE "JOB" CASCADE CONSTRAINTS;
+DROP TABLE "AREA_SCOPE" CASCADE CONSTRAINTS;
+DROP TABLE "CHANGE" CASCADE CONSTRAINTS;
+DROP TABLE "AREA_C" CASCADE CONSTRAINTS;
+DROP TABLE "AREA_M" CASCADE CONSTRAINTS;
+DROP TABLE "BOARD_C" CASCADE CONSTRAINTS;
+DROP TABLE "BORDER_M" CASCADE CONSTRAINTS;
+DROP TABLE "CUSTOMER_M" CASCADE CONSTRAINTS;
+```
+
+
+
 # 프로젝트 테이블 생성 SQL문
 
 ```sql
+-- 테이블 순서는 관계를 고려하여 한 번에 실행해도 에러가 발생하지 않게 정렬되었습니다.
 
 -- area Table Create SQL
 CREATE TABLE area
@@ -32,7 +61,7 @@ CREATE TABLE quarter
 (
     q_id       INT    NOT NULL, 
     area_id    INT    NOT NULL, 
-    CONSTRAINT QUARTER_PK PRIMARY KEY (q_id)
+    CONSTRAINT QUARTER_PK PRIMARY KEY (q_id, area_id)
 )
 /
 
@@ -149,29 +178,9 @@ CREATE TABLE board
     content      VARCHAR2(100)    NOT NULL, 
     writedate    DATE             NOT NULL, 
     cnt          INT              NOT NULL, 
+    writer       VARCHAR2(60)     NOT NULL, 
     CONSTRAINT BOARD_PK PRIMARY KEY (board_id)
 )
-/
-
-CREATE SEQUENCE board_SEQ
-START WITH 1
-INCREMENT BY 1;
-/
-
-CREATE OR REPLACE TRIGGER board_AI_TRG
-BEFORE INSERT ON board 
-REFERENCING NEW AS NEW FOR EACH ROW 
-BEGIN 
-    SELECT board_SEQ.NEXTVAL
-    INTO :NEW.board_id
-    FROM DUAL;
-END;
-/
-
---DROP TRIGGER board_AI_TRG;
-/
-
---DROP SEQUENCE board_SEQ;
 /
 
 COMMENT ON TABLE board IS '게시판'
@@ -192,13 +201,17 @@ COMMENT ON COLUMN board.writedate IS '작성날짜'
 COMMENT ON COLUMN board.cnt IS '조회수'
 /
 
+COMMENT ON COLUMN board.writer IS '작성자'
+/
+
 
 -- area Table Create SQL
 CREATE TABLE living_population
 (
     area_id           INT    NOT NULL, 
     q_id              INT    NOT NULL, 
-    all_living_num    INT    NOT NULL
+    all_living_num    INT    NOT NULL, 
+    CONSTRAINT LIVING_POPULATION_PK PRIMARY KEY (area_id, q_id)
 )
 /
 
@@ -225,7 +238,8 @@ CREATE TABLE apartment
 (
     area_id      INT    NOT NULL, 
     q_id         INT    NOT NULL, 
-    apart_num    INT    NOT NULL
+    apart_num    INT    NOT NULL, 
+    CONSTRAINT APARTMENT_PK PRIMARY KEY (area_id, q_id)
 )
 /
 
@@ -258,7 +272,8 @@ CREATE TABLE store
     start_rate         INT    NOT NULL, 
     start_store_num    INT    NOT NULL, 
     close_rate         INT    NOT NULL, 
-    close_store_num    INT    NOT NULL
+    close_store_num    INT    NOT NULL, 
+    CONSTRAINT STORE_PK PRIMARY KEY (serv_id, q_id, area_id)
 )
 /
 
@@ -308,7 +323,8 @@ CREATE TABLE job
 (
     area_id        INT    NOT NULL, 
     q_id           INT    NOT NULL, 
-    all_job_num    INT    NOT NULL
+    all_job_num    INT    NOT NULL, 
+    CONSTRAINT JOB_PK PRIMARY KEY (area_id, q_id)
 )
 /
 
@@ -357,7 +373,8 @@ CREATE TABLE sales
     30_sal_num         INT    NOT NULL, 
     40_sal_num         INT    NOT NULL, 
     50_sal_num         INT    NOT NULL, 
-    60_sal_num         INT    NOT NULL
+    60_sal_num         INT    NOT NULL, 
+    CONSTRAINT SALES_PK PRIMARY KEY (area_id, serv_id, q_id)
 )
 /
 
@@ -453,11 +470,12 @@ ALTER TABLE sales
 -- area Table Create SQL
 CREATE TABLE area_scope
 (
-    area_id    INT    NOT NULL, 
-    x          INT    NOT NULL, 
-    y          INT    NOT NULL, 
-    gu_id      INT    NOT NULL, 
-    CONSTRAINT AREA_SCOPE_PK PRIMARY KEY (gu_id)
+    area_id    INT             NOT NULL, 
+    x          INT             NOT NULL, 
+    y          INT             NOT NULL, 
+    gu_id      INT             NOT NULL, 
+    gu_name    VARCHAR2(60)    NOT NULL, 
+    CONSTRAINT AREA_SCOPE_PK PRIMARY KEY (area_id, gu_id)
 )
 /
 
@@ -476,6 +494,9 @@ COMMENT ON COLUMN area_scope.y IS '와이좌표'
 COMMENT ON COLUMN area_scope.gu_id IS '구 코드'
 /
 
+COMMENT ON COLUMN area_scope.gu_name IS '구 이름'
+/
+
 ALTER TABLE area_scope
     ADD CONSTRAINT FK_area_scope_area_id_area_are FOREIGN KEY (area_id)
         REFERENCES area (area_id)
@@ -490,7 +511,8 @@ CREATE TABLE change
     change_id        INT             NOT NULL, 
     change_coname    VARCHAR2(20)    NOT NULL, 
     oper_month       INT             NOT NULL, 
-    close_month      INT             NOT NULL
+    close_month      INT             NOT NULL, 
+    CONSTRAINT CHANGE_PK PRIMARY KEY (q_id, area_id)
 )
 /
 
@@ -581,7 +603,8 @@ ALTER TABLE area_m
 CREATE TABLE board_c
 (
     cust_id     INT    NOT NULL, 
-    board_id    INT    NOT NULL
+    board_id    INT    NOT NULL, 
+    CONSTRAINT BOARD_C_PK PRIMARY KEY (cust_id, board_id)
 )
 /
 
@@ -609,7 +632,8 @@ ALTER TABLE board_c
 CREATE TABLE border_m
 (
     mana_id     INT    NOT NULL, 
-    board_id    INT    NOT NULL
+    board_id    INT    NOT NULL, 
+    CONSTRAINT BORDER_M_PK PRIMARY KEY (mana_id, board_id)
 )
 /
 
@@ -637,7 +661,8 @@ ALTER TABLE border_m
 CREATE TABLE customer_m
 (
     cust_id    INT    NOT NULL, 
-    mana_id    INT    NOT NULL
+    mana_id    INT    NOT NULL, 
+    CONSTRAINT CUSTOMER_M_PK PRIMARY KEY (cust_id, mana_id)
 )
 /
 
@@ -669,7 +694,7 @@ ALTER TABLE customer_m
 # 시퀀스 생성
 
 ```
-drop sequence board_SEQ;//자동생성 시퀀스 삭제
+ㄴdrop sequence board_SEQ;//자동생성 시퀀스 삭제
 create sequence board_seq increment by 1 start with 1;
 commit;
 ```
