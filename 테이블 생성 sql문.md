@@ -374,7 +374,125 @@ CREATE TABLE sales
     40_sal_num         INT             NOT NULL, 
     50_sal_num         INT             NOT NULL, 
     60_sal_num         INT             NOT NULL, 
+    CONSTRAINT -- area Table Create SQL
+CREATE TABLE sales
+(
+    area_id            INT             NOT NULL, 
+    serv_id            VARCHAR2(60)    NOT NULL, 
+    q_id               INT             NOT NULL, 
+    month_sal_money    INT             NOT NULL, 
+    month_sal_num      INT             NOT NULL, 
+    wday_sal_money     INT             NOT NULL, 
+    wkend_sal_money    INT             NOT NULL, 
+    m_sal_money        INT             NOT NULL, 
+    w_sal_money        INT             NOT NULL, 
+    sal_money_10       INT             NOT NULL, 
+    sal_money_20       INT             NOT NULL, 
+    sal_money_30       INT             NOT NULL, 
+    sal_money_40       INT             NOT NULL, 
+    sal_money_50       INT             NOT NULL, 
+    sal_money_60       INT             NOT NULL, 
+    wday_sal_num       INT             NOT NULL, 
+    wkend_sal_num      INT             NOT NULL, 
+    m_sal_num          INT             NOT NULL, 
+    w_sal_num          INT             NOT NULL, 
+    sal_num_10         INT             NOT NULL, 
+    sal_num_20         INT             NOT NULL, 
+    sal_num_30         INT             NOT NULL, 
+    sal_num_40         INT             NOT NULL, 
+    sal_num_50         INT             NOT NULL, 
+    sal_num_60         INT             NOT NULL, 
     CONSTRAINT SALES_PK PRIMARY KEY (area_id, serv_id, q_id)
+)
+/
+
+COMMENT ON TABLE sales IS '상권_추정매출'
+/
+
+COMMENT ON COLUMN sales.area_id IS '상권 코드'
+/
+
+COMMENT ON COLUMN sales.serv_id IS '서비스업종 코드'
+/
+
+COMMENT ON COLUMN sales.q_id IS '기준분기 코드'
+/
+
+COMMENT ON COLUMN sales.month_sal_money IS '월 매출 금액'
+/
+
+COMMENT ON COLUMN sales.month_sal_num IS '월 매출 수'
+/
+
+COMMENT ON COLUMN sales.wday_sal_money IS '주중 매출 금액'
+/
+
+COMMENT ON COLUMN sales.wkend_sal_money IS '주말 매출 금액'
+/
+
+COMMENT ON COLUMN sales.m_sal_money IS '남성 매출 금액'
+/
+
+COMMENT ON COLUMN sales.w_sal_money IS '여성 매출 금액'
+/
+
+COMMENT ON COLUMN sales.sal_money_10 IS '매출 금액 10'
+/
+
+COMMENT ON COLUMN sales.sal_money_20 IS '매출 금액 20'
+/
+
+COMMENT ON COLUMN sales.sal_money_30 IS '매출 금액 30'
+/
+
+COMMENT ON COLUMN sales.sal_money_40 IS '매출 금액 40'
+/
+
+COMMENT ON COLUMN sales.sal_money_50 IS '매출 금액 50'
+/
+
+COMMENT ON COLUMN sales.sal_money_60 IS '매출 금액 60'
+/
+
+COMMENT ON COLUMN sales.wday_sal_num IS '주중 매출 수'
+/
+
+COMMENT ON COLUMN sales.wkend_sal_num IS '주말 매출 수'
+/
+
+COMMENT ON COLUMN sales.m_sal_num IS '남성 매출 수'
+/
+
+COMMENT ON COLUMN sales.w_sal_num IS '여성 매출 수'
+/
+
+COMMENT ON COLUMN sales.sal_num_10 IS '매출 수 10'
+/
+
+COMMENT ON COLUMN sales.sal_num_20 IS '매출 수 20'
+/
+
+COMMENT ON COLUMN sales.sal_num_30 IS '매출 수 30'
+/
+
+COMMENT ON COLUMN sales.sal_num_40 IS '매출 수 40'
+/
+
+COMMENT ON COLUMN sales.sal_num_50 IS '매출 수 50'
+/
+
+COMMENT ON COLUMN sales.sal_num_60 IS '매출 수 60'
+/
+
+ALTER TABLE sales
+    ADD CONSTRAINT FK_sales_area_id_quarter_area_ FOREIGN KEY (area_id, q_id)
+        REFERENCES quarter (area_id, q_id)
+/
+
+ALTER TABLE sales
+    ADD CONSTRAINT FK_sales_serv_id_service_serv_ FOREIGN KEY (serv_id)
+        REFERENCES service (serv_id)
+/SALES_PK PRIMARY KEY (area_id, serv_id, q_id)
 )
 /
 
