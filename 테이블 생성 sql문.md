@@ -772,6 +772,10 @@ ALTER TABLE sales_4
     ADD CONSTRAINT FK_sales_4_area_id_sales_1_are FOREIGN KEY (area_id, serv_id, q_id)
         REFERENCES sales_1 (area_id, serv_id, q_id)
 /
+delete from area_scope;
+ALTER TABLE area_scope MODIFY(x FLOAT(24));
+ALTER TABLE area_scope MODIFY(y FLOAT(24));
+
 ```
 
 
