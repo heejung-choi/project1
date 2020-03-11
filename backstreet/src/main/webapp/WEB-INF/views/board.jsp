@@ -43,6 +43,9 @@
 	}
 </style>
 <body>
+<%String ac = (String)request.getAttribute("ac");%>
+<h1><%=ac%></h1>
+
 <%
 	ArrayList<BoardVO> list = (ArrayList<BoardVO>)request.getAttribute("list");
 	BoardVO listone = (BoardVO)request.getAttribute("listOne");

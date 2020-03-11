@@ -20,7 +20,7 @@
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
-<!-- jung 0227 context componet-scan  -->	
+<!-- jung 0309 context componet-scan  -->	
 	<context:component-scan base-package="my.spring.backstreet" />
 	<context:component-scan base-package="dao" />	
 	<context:component-scan base-package="vo" />
@@ -30,7 +30,7 @@
 		
 <beans:bean id="dataSource" 
 	class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-<!-- jung 0227 oracle 아이디 비밀번호 설정  -->		
+<!-- jung 0309 oracle 아이디 비밀번호 설정  -->		
 <beans:property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
 		<beans:property name="url" value="jdbc:oracle:thin:@localhost:1521:XE" />
 		<beans:property name="username" value="flower" />

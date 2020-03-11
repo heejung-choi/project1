@@ -15,14 +15,14 @@ import vo.BoardVO;
 public class BoardDAO {
 	@Autowired
 	SqlSession session = null;
-
+	//0309 jung 전체 리스트 출력
 	public List<BoardVO> listAll() {
 		List<BoardVO> list = new ArrayList<BoardVO>();
 		String statement = "resource.BoardMapper.select";
 		list = session.selectList(statement);
 		return list;
 	}
-
+	//0309 jung 데이터 입력
 	public boolean insert(BoardVO vo) {
 		System.out.println(" date: " + vo.getWritedate());
 		boolean result = false;
@@ -31,7 +31,7 @@ public class BoardDAO {
 			result = true;
 		return result;
 	}
-
+	// 0309 jung  데이터 검색
 	public List<BoardVO> search(String keyword, String searchType) {
 		List<BoardVO> list =  new ArrayList<BoardVO>();
 		String statement = "resource.BoardMapper.search";
@@ -42,14 +42,14 @@ public class BoardDAO {
 		list = session.selectList(statement, map);
 		return list;
 	}
-
+	// 0309 jung 작성자로 검색 
 	public List<BoardVO> listWriter(String writer) {
 		List<BoardVO> list = new ArrayList<BoardVO>();
 		String statement = "resource.BoardMapper.selectWriter";
 		list = session.selectList(statement, writer);
 		return list;
 	}
-
+	// 0309 jung 데이터 삭제
 	public boolean delete(int id) {
 		boolean result = false;
 		String statement = "resource.BoardMapper.delete";
@@ -57,7 +57,7 @@ public class BoardDAO {
 			result = true;
 		return result;
 	}
-
+	// 0309 jung 데이터 업데이트
 	public boolean update(BoardVO vo) {
 		boolean result = false;
 		String statement = "resource.BoardMapper.update";
@@ -67,7 +67,7 @@ public class BoardDAO {
 		System.out.println("DAO result값"+result);
 		return result;
 	}
-
+	// 0309 jung  한개만 출력
 	public BoardVO listOne(int board_id) {
 		BoardVO vo = null;
 		String statement = "resource.BoardMapper.read";

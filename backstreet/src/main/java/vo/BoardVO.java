@@ -1,7 +1,7 @@
 package vo;
 
 public class BoardVO {
-	/* jung 0227 BoardVO, getter, setter 생성 */
+	/* jung 0309 BoardVO, getter, setter 생성 */
 	private int board_id;
 	private String title;
 	private String content;
