@@ -16,8 +16,11 @@ import vo.BoardVO;
 public class BoardController {
 	@Autowired
 	BoardDAO dao;
-	// 0309 jung  main 화면 controller
-	@RequestMapping(value = "/main", method = RequestMethod.GET)
+	//0311 jung main 화면
+	@RequestMapping(value="/main") public String mainView() { return "main"; }
+	
+	// 0309 jung board main 화면 controller
+	@RequestMapping(value = "/boardmain", method = RequestMethod.GET)
 	public ModelAndView main(BoardVO vo){
 		ModelAndView mav = new ModelAndView();
 		List<BoardVO> list = dao.listAll();
