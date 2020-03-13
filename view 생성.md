@@ -41,14 +41,53 @@ where - group by - having 의 순서
 # change_view
 
 create or replace force view change_view as
-select avg(oper_month) as oper_month_avg, avg(close_month) as close_month_avg from change;
+
+select avg(oper_month) as oper_month_avg, 
+
+avg(close_month) as close_month_avg 
+
+from change;
 
 
 
 # job_view
 
 create or replace force view job_view as
-select avg(all_job_num) as all_job_num_avg from job;
+
+select avg(all_job_num) as all_job_num_avg 
+
+from job;
+
+
+
+# apartment_view
+
+create or replace force view apartment_view as
+select avg(apart_num) as apart_num_avg 
+
+from apartment;
+
+
+
+# store_view
+
+create or replace force view store_view as
+select avg(start_rate) as start_rate_avg, 
+avg(start_store_num) as start_store_num_avg,
+avg(close_rate) as close_rate_avg, 
+avg(close_store_num) as close_store_num_avg
+from store ;
+
+
+
+# sales_1_view
+
+create or replace force view sales_1_view as
+select avg(month_sal_money) as month_sal_money_avg,
+avg(month_sal_num) as month_sal_num_avg
+from sales_1;
+
+
 
 # 골목상권 분석 데이터
 
@@ -190,7 +229,74 @@ a 상권의 총 상주인구 수는 (living_population의 all_living_num)입니�
 
 a 상권의 아파트 단지수는 (apartment의 apart_num)입니다.
 
-이것은 골목상권의 평균 총 아파트 단지 수인 (apartment_view의  apart_num_avg) 보다 (작습니다./큽니다)
+이것은 골목상권의 평균 총 아파트 단지 수인 (apartment_view의  apart_num_avg) 보다 (작습니다./큽니다.)
 
 
 
+# store
+
+1) store_num 2) sim_store_num 3) start_rate 4)start_store_num 5)close_rate 
+
+6) close_store_num
+
+a 상권의 점포수는 1) 이고, 고객님이 선택하신 업종과 유사한 업종의 점포수는 2) 입니다.
+
+a 상권의 개업률은 3) 이고 개업 점포 수는 4) 입니다. 
+
+또한 a 상권의 폐업률은 5) 이고 폐업 점포 수는 6) 입니다.
+
+a 상권의 개업률은 평균인 (store_view의 start_rate_avg)과 비교했을 때 (높고/낮고) 개업 점포 수는 평균인 (store_view의 start_store_num_avg)과 비교했을 때 (높습니다./낮습니다.)
+
+a 상권의 폐업률은 평균인 (store_view의 close_rate_avg)과 비교했을 때 (높고/낮고) 개업 점포 수는 평균인 (store_view의 close_store_num_avg)과 비교했을 때 (높습니다./낮습니다.)
+
+
+
+# sales_1
+
+sales_1부터 4까지의 컨설팅 정보는 상권분석 정보 다음에 출력해야 하므로
+
+화면 구성시 상권분석 정보 뒤에 sales 컨설팅 정보가 나오도록 구성
+
+a 상권의 b업종의 경우 월 매출금액(*** sales_1 의 month_sal_money )원은 골목상권의 월 매출금액의 평균인(sales_1_view의 month_sal_money_avg)원과 비교했을 때 (높습니다/낮습니다.)
+
+또한 월 매출 수(***sales_1의 month_sal_num )는 골목상권의 월 매출수의 평균(sales_1_view의 month_sal_num_avg))과 비교했을 때(높습니다/낮습니다.)
+
+a 상권의 b 업종의 경우 주중 매출 금액(*** sales_1의 wday_sal_money)원이 주말 매출 금액보다 (*** sales_1 wday_sal_money) (낮습니다/높습니다)
+
+a 상권의 b 업종의 경우 남성 매출 금액(*** sales_1의 m_sal_money)원이 여성 매출 금액보다 (*** sales_1 w_sal_money) (낮습니다/높습니다)
+
+
+
+#  sales_2
+
+a 상권의 b 업종의 10대~60대 매출 금액 중 가장 큰 금액은 (***가장 큰 금액)으로
+
+(*** 00대)가 가장 높습니다.
+
+가장 큰 금액은 골목상권 분석 sales_2부분에서 가장 큰 금액 추출
+
+금액에 해당하는 컬럼명으로 00대 출력
+
+ex ) sal_money_10이 가장 높다면
+
+컬럼명추출하여 sal_money_10 -> 10대로 변환하여 가로안에 출력
+
+string a; 
+
+if(a==sal_money_10)
+
+a=10대;
+
+else if(a==sal_money_20)
+
+a=20대;
+
+else if(a==sal_money_30)
+
+
+
+# sales_4
+
+a 상권의 b 업종의 10대~60대 매출 수 중 가장 많은 매출 수는 (***가장 큰 매출수)으로  (****00대)가 가장 높습니다.
+
+sales_3테이블과 같은 원리

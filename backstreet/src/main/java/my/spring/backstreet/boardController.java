@@ -19,6 +19,8 @@ public class BoardController {
 	//0311 jung main 화면
 	@RequestMapping(value="/main") public String mainView() { return "main"; }
 	
+	@RequestMapping(value="/intro") public String introView() { return "intro"; }
+	
 	// 0309 jung board main 화면 controller
 	@RequestMapping(value = "/boardmain", method = RequestMethod.GET)
 	public ModelAndView main(BoardVO vo){
