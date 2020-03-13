@@ -38,6 +38,18 @@ where - group by - having 의 순서
 
 
 
+# change_view
+
+create or replace force view change_view as
+select avg(oper_month) as oper_month_avg, avg(close_month) as close_month_avg from change;
+
+
+
+# job_view
+
+create or replace force view job_view as
+select avg(all_job_num) as all_job_num_avg from job;
+
 # 골목상권 분석 데이터
 
 <골목상권 분석 정보>
@@ -118,9 +130,9 @@ a 업종의 남성 매출 수는 1) 이고, 여성 매출 수는 2) 입니다.
 
 ## change
 
-우선 고객님께서 선택하신  (상권코드명(quarter테이블의 area_coname) 상권에 대한 정보만 안내 드리겠습니다. 고객님이 선택하신 상권은
+우선 고객님께서 선택하신  (상권코드명(quarter테이블의 area_coname) 상권에 대한 정보만 안내 드리겠습니다. 
 
-
+고객님이 선택하신 상권은
 
 if==(change 테이블의 CHANGE_ID)(1이라면)
 
@@ -146,15 +158,39 @@ if==(change 테이블의 CHANGE_ID)(4라면)
 
 
 
+아래에서 고객님께서 선택하신 상권/ 서비스업종에 대해 더 자세한 컨설팅 정보를 보여드리겠습니다.
 
+- 1) oper_month 2) close_month
 
 a 업종이 운영되는 영업 개월 평균은 1) 이고, 폐업 개월 평균은 2) 입니다.
 
-골목상권의 평균 영업 개월 수인 * 보다 (작습니다./큽니다) 
+골목상권의 평균 영업 개월 수인 (change_view의 oper_month_avg ) 보다 (작습니다./큽니다) 
 
-또한, 골목상권의 평균 폐업 개월 수인 * 보다 (작습니다./큽니다)
+또한, 골목상권의 평균 폐업 개월 수인 (change_view의 close_month_avg )  보다 (작습니다./큽니다)
 
 
+
+# job table
+
+a 상권의 총 직장인구 수는 (job의 all_job_num) 입니다.
+
+이것은 골목상권의 평균 총 직장인구 수인 (job_view의 all_job_num_avg) 보다 (작습니다./큽니다)
+
+
+
+# living_population
+
+a 상권의 총 상주인구 수는 (living_population의 all_living_num)입니다.
+
+이것은 골목상권의 평균 총 상주인구 수인 (living_population_view의 all_living_num_avg) 보다 (작습니다./큽니다)
+
+
+
+# apartment
+
+a 상권의 아파트 단지수는 (apartment의 apart_num)입니다.
+
+이것은 골목상권의 평균 총 아파트 단지 수인 (apartment_view의  apart_num_avg) 보다 (작습니다./큽니다)
 
 
 
