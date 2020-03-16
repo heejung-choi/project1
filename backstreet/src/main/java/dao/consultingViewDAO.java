@@ -4,68 +4,70 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import vo.salesVO;
+
 @Repository
 public class consultingViewDAO {
 	
 	@Autowired
 	SqlSession session = null;
 	
-// change Å×ÀÌºí
+// change ï¿½ï¿½ï¿½Ìºï¿½
 	public String changeConsulting1(int area_id){
 		String changeCodeName = null;
 		String statement = "resource.BackstreetMapper.changeConsulting1";
-		changeCodeName = session.selectOne(statement,area_id); // area_id °ª µé¾î°¡¸é µÊ.
+		changeCodeName = session.selectOne(statement,area_id); // area_id ï¿½ï¿½ ï¿½ï¿½î°¡ï¿½ï¿½ ï¿½ï¿½.
 		return changeCodeName;
-	} // ´ÙÀÌ³ª¹Í..
+	} // ï¿½ï¿½ï¿½Ì³ï¿½ï¿½ï¿½..
 	
 	public int changeConsulting2(int area_id){
 		int oper_month = 0;
 		String statement = "resource.BackstreetMapper.changeConsulting2";
-		oper_month = session.selectOne(statement,area_id); // area_id °ª µé¾î°¡¸é µÊ.
+		oper_month = session.selectOne(statement,area_id); // area_id ï¿½ï¿½ ï¿½ï¿½î°¡ï¿½ï¿½ ï¿½ï¿½.
 		return oper_month;
-	} // ¿µ¾÷ °³¿ù 
+	} // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 
 	
 	public int changeConsulting3(int area_id){
 		int close_month = 0;
 		String statement = "resource.BackstreetMapper.changeConsulting3";
-		close_month = session.selectOne(statement,area_id); // area_id °ª µé¾î°¡¸é µÊ.
+		close_month = session.selectOne(statement,area_id); // area_id ï¿½ï¿½ ï¿½ï¿½î°¡ï¿½ï¿½ ï¿½ï¿½.
 		return close_month;
-	} // Æó¾÷ °³¿ù 
-//change Å×ÀÌºí ³¡
+	} // ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 
+//change ï¿½ï¿½ï¿½Ìºï¿½ ï¿½ï¿½
 	
-//area Å×ÀÌºí
+//area ï¿½ï¿½ï¿½Ìºï¿½
 	public String areaConsulting1(int area_id){
 		String areaCodeName = null;
 		String statement = "resource.BackstreetMapper.areaConsulting1";
-		areaCodeName = session.selectOne(statement,area_id); // area_id °ª µé¾î°¡¸é µÊ.
+		areaCodeName = session.selectOne(statement,area_id); // area_id ï¿½ï¿½ ï¿½ï¿½î°¡ï¿½ï¿½ ï¿½ï¿½.
 		return areaCodeName;
-	} // Áö¿ª¸í
+	} // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	
 	public int areaConsulting2(int area_id){
 		int change_id = 0;
 		String statement = "resource.BackstreetMapper.areaConsulting2";
-		change_id = session.selectOne(statement,area_id); // area_id °ª µé¾î°¡¸é µÊ.
+		change_id = session.selectOne(statement,area_id); // area_id ï¿½ï¿½ ï¿½ï¿½î°¡ï¿½ï¿½ ï¿½ï¿½.
 		return change_id;
-	} // Á¤Ã¼, »ó±ÇÃà¼Ò, »ó±ÇÈ®Àå, ´ÙÀÌ³ª¹Í µîÀ» À» »Ì±â À§ÇÑ change_id
-//area Å×ÀÌºí ³¡
+	} // ï¿½ï¿½Ã¼, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½È®ï¿½ï¿½, ï¿½ï¿½ï¿½Ì³ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ì±ï¿½ ï¿½ï¿½ï¿½ï¿½ change_id
+//area ï¿½ï¿½ï¿½Ìºï¿½ ï¿½ï¿½
 	
-//service Å×ÀÌºí
+//service ï¿½ï¿½ï¿½Ìºï¿½
 	public String serviceConsulting1(String serv_id){
 		String serviceCodeName = null;
 		String statement = "resource.BackstreetMapper.serviceConsulting1";
-		serviceCodeName = session.selectOne(statement,serv_id); // area_id °ª µé¾î°¡¸é µÊ.
+		serviceCodeName = session.selectOne(statement,serv_id); // area_id ï¿½ï¿½ ï¿½ï¿½î°¡ï¿½ï¿½ ï¿½ï¿½.
 		return serviceCodeName;
-	} // ¾÷Á¾ Ãâ·Â
-//service Å×ÀÌºí ³¡
+	} // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+//service ï¿½ï¿½ï¿½Ìºï¿½ ï¿½ï¿½
 	
-//job Å×ÀÌºí
+//job ï¿½ï¿½ï¿½Ìºï¿½
 	public int jobConsulting1(int area_id) {
 		int all_job_num = 0;
 		String statement = "resource.BackstreetMapper.jobConsulting1";
 		all_job_num = session.selectOne(statement,area_id);
 		return all_job_num;
-	} //ÃÑ Á÷Àå ÀÎ±¸¼ö Ãâ·Â
-//job Å×ÀÌºí ³¡
+	} //ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+//job ï¿½ï¿½ï¿½Ìºï¿½ ï¿½ï¿½
 	
 //view
 	public float changeViewConsulting1(){
@@ -73,14 +75,14 @@ public class consultingViewDAO {
 		String statement = "resource.BackstreetMapper.changeViewConsulting1";
 		oper_month_avg = session.selectOne(statement);
 		return oper_month_avg;
-	} // ¿µ¾÷ °³¿ù Æò±Õ(View)
+	} // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½(View)
 	
 	public float changeViewConsulting2(){
 		float close_month_avg = 0;
 		String statement = "resource.BackstreetMapper.changeViewConsulting2";
 		close_month_avg = session.selectOne(statement);
 		return close_month_avg;
-	} // Æó¾÷ °³¿ù Æò±Õ(View)
+	} // ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½(View)
 	
 	public int jobViewConsulting1() {
 		int all_job_num_avg = 0;
@@ -88,5 +90,16 @@ public class consultingViewDAO {
 		all_job_num_avg = session.selectOne(statement);
 		return all_job_num_avg;
 	}
-//view ³¡
+//view ï¿½ï¿½
+	
+//ê³¨ëª©ìƒê¶Œë¶„ì„
+	public long sales_1Area1(salesVO vo){
+		long money;
+		//System.out.println(vo);
+		String statement = "resource.BackstreetMapper.sales_1Area1";
+		money = session.selectOne(statement,vo);
+		//System.out.println("DAO ì—ì„œ ì¶”ì¶œëœ ê°’"+money);
+		return money;
+	}
+//ê³¨ëª©ìƒê¶Œë¶„ì„ ë
 }

@@ -1,5 +1,7 @@
 package my.spring.backstreet;
 
+import java.text.DecimalFormat;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +14,7 @@ import service.getLoginAccessToken;
 import service.getLogoutUserId;
 import service.getTrandsSearchResult;
 import vo.changeVO;
+import vo.salesVO;
 
 
 @Controller
@@ -47,8 +50,8 @@ public class mainController {
 	}
 	@RequestMapping(value="/login")
 	public ModelAndView login(@RequestParam("code") String code) {
-		System.out.println("Controller - login ÇÔ¼ö");
-		System.out.println("code : " + code ); // »ç¿ëÀÚ ÀÎÁõÀ» ÅëÇÑ code È¹µæ -> Access Token, Refresh Token È¹µæ °¡´É -> API »ç¿ë
+		System.out.println("Controller - login ï¿½Ô¼ï¿½");
+		System.out.println("code : " + code ); // ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ code È¹ï¿½ï¿½ -> Access Token, Refresh Token È¹ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ -> API ï¿½ï¿½ï¿½
 		String accessToken = kakaoLogin.getAccessToken(code);
 		System.out.println("AccessToke : " + accessToken);
 		ModelAndView mav = new ModelAndView();
@@ -60,9 +63,9 @@ public class mainController {
 	
 	@RequestMapping(value="/logout")
 	public String logout(@RequestParam("accessToken") String accessToken) {
-		System.out.println("Controller - logout ÇÔ¼ö"); // »ç¿ëÀÚ ÀÎÁõÀ» ÅëÇÑ code È¹µæ -> Access Token, Refresh Token È¹µæ °¡´É -> API »ç¿ë
+		System.out.println("Controller - logout ï¿½Ô¼ï¿½"); // ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ code È¹ï¿½ï¿½ -> Access Token, Refresh Token È¹ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ -> API ï¿½ï¿½ï¿½
 
-		// ·Î±×¾Æ¿ô ¼­ºñ½º Å¬·¡½º ½ÇÇà
+		// ï¿½Î±×¾Æ¿ï¿½ ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		String UserId = kakaoLogout.getUserId(accessToken);
 		System.out.println("UserID : " + UserId);
 		return "main";
@@ -103,49 +106,49 @@ public class mainController {
 	
 	//consultingView Controller......
 	@RequestMapping(value="/changeConsulting1")
-	public ModelAndView changeConsulting1() {//int area_id ¸¦ ³ªÁß¿¡ ¸Å°³º¯¼ö´Â ³ªÁß¿¡ ¼¼È£ÇüÀÌ º¸³»ÁØ°Å ¹ÞÀ¸¸é µÊ..
+	public ModelAndView changeConsulting1() {//int area_id ï¿½ï¿½ ï¿½ï¿½ï¿½ß¿ï¿½ ï¿½Å°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ß¿ï¿½ ï¿½ï¿½È£ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½..
 		String changeCodeName = consultingViewDAO.changeConsulting1(1001495);
-		System.out.println("ÄÁÆ®·Ñ·¯ changeCodeName :" + changeCodeName);
-		//ÀÓ½Ã·Î  ¼³Á¤ÇØÁÜ.. ³ªÁß¿¡ ¸Å°³º¯¼ö·Î ¹Þ¾Æ¿À¸é ¼öÁ¤ 
-		//»ó±Ç Á¤º¸¸¦ ¹Þ¾Æ¿À´Â DAOÀÓ.. ex) ´ÙÀÌ³ª¹Í »ó±Ç
-		//¾÷Á¾ Ãâ·Â
+		System.out.println("ï¿½ï¿½Æ®ï¿½Ñ·ï¿½ changeCodeName :" + changeCodeName);
+		//ï¿½Ó½Ã·ï¿½  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.. ï¿½ï¿½ï¿½ß¿ï¿½ ï¿½Å°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¾Æ¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 
+		//ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¾Æ¿ï¿½ï¿½ï¿½ DAOï¿½ï¿½.. ex) ï¿½ï¿½ï¿½Ì³ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+		//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 		
 		String areaCodeName = consultingViewDAO.areaConsulting1(1001495); // 
-		System.out.println("ÄÁÆ®·Ñ·¯ areaCodeName :" + areaCodeName);
-		// ÀÓ½Ã·Î(areaÅ×ÀÌºíÀÇ area_id) ¼³Á¤ÇØÁÜ
-		// »ó±ÇÄÚµå¸í(areaÅ×ÀÌºíÀÇ area_coname)À» ¹Þ¾Æ¿À´Â DAO ex)µÐÃÌ¿ªÀüÅë½ÃÀå
+		System.out.println("ï¿½ï¿½Æ®ï¿½Ñ·ï¿½ areaCodeName :" + areaCodeName);
+		// ï¿½Ó½Ã·ï¿½(areaï¿½ï¿½ï¿½Ìºï¿½ï¿½ï¿½ area_id) ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		// ï¿½ï¿½ï¿½ï¿½Úµï¿½ï¿½(areaï¿½ï¿½ï¿½Ìºï¿½ï¿½ï¿½ area_coname)ï¿½ï¿½ ï¿½Þ¾Æ¿ï¿½ï¿½ï¿½ DAO ex)ï¿½ï¿½ï¿½Ì¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		
 		int change_id = consultingViewDAO.areaConsulting2(1001495);
-		System.out.println("ÄÁÆ®·Ñ·¯ change_id :" + change_id);
-		//change_id °ªÀ¸·Î Á¤Ã¼µÇ¾î ÀÖ´Â»ó±Ç~ È°¹ßÇÑ »ó±Ç ±¸ºÐ
+		System.out.println("ï¿½ï¿½Æ®ï¿½Ñ·ï¿½ change_id :" + change_id);
+		//change_id ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½Ç¾ï¿½ ï¿½Ö´Â»ï¿½ï¿½~ È°ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		
 		String serviceCodeName = consultingViewDAO.serviceConsulting1("CS300005");
-		System.out.println("ÄÁÆ®·Ñ·¯ serviceCodeName :" + serviceCodeName);
+		System.out.println("ï¿½ï¿½Æ®ï¿½Ñ·ï¿½ serviceCodeName :" + serviceCodeName);
 		
 		int oper_month = consultingViewDAO.changeConsulting2(1001495);
-		System.out.println("ÄÁÆ®·Ñ·¯ oper_month :" + oper_month);
-		//change_id °ªÀ¸·Î Á¤Ã¼µÇ¾î ÀÖ´Â»ó±Ç~ È°¹ßÇÑ »ó±Ç ±¸ºÐ
-		//¿µ¾÷ °³¿ù
+		System.out.println("ï¿½ï¿½Æ®ï¿½Ñ·ï¿½ oper_month :" + oper_month);
+		//change_id ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½Ç¾ï¿½ ï¿½Ö´Â»ï¿½ï¿½~ È°ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+		//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		
 		int close_month = consultingViewDAO.changeConsulting3(1001495);
-		System.out.println("ÄÁÆ®·Ñ·¯ close_month :" + close_month);
-		//change_id °ªÀ¸·Î Á¤Ã¼µÇ¾î ÀÖ´Â»ó±Ç~ È°¹ßÇÑ »ó±Ç ±¸ºÐ
-		//Æó¾÷ °³¿ù
+		System.out.println("ï¿½ï¿½Æ®ï¿½Ñ·ï¿½ close_month :" + close_month);
+		//change_id ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½Ç¾ï¿½ ï¿½Ö´Â»ï¿½ï¿½~ È°ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+		//ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		
 		float oper_month_avg = consultingViewDAO.changeViewConsulting1();	
-		System.out.println("ÄÁÆ®·Ñ·¯oper_month_avg :" + oper_month_avg);
-		// Æò±Õ ¿µ¾÷ °³¿ù
+		System.out.println("ï¿½ï¿½Æ®ï¿½Ñ·ï¿½oper_month_avg :" + oper_month_avg);
+		// ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		float close_month_avg = consultingViewDAO.changeViewConsulting2();
-		System.out.println("ÄÁÆ®·Ñ·¯ close_month_avg :" + close_month_avg);
-		// Æò±Õ Æó¾÷ °³¿ù
+		System.out.println("ï¿½ï¿½Æ®ï¿½Ñ·ï¿½ close_month_avg :" + close_month_avg);
+		// ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		
 		int all_job_num = consultingViewDAO.jobConsulting1(1001495);
-		System.out.println("ÄÁÆ®·Ñ·¯ all_job_num :" + all_job_num);
-		//ÃÑ Á÷Àå ÀÎ±¸¼ö
+		System.out.println("ï¿½ï¿½Æ®ï¿½Ñ·ï¿½ all_job_num :" + all_job_num);
+		//ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Î±ï¿½ï¿½ï¿½
 		
 		int all_job_num_avg = consultingViewDAO.jobViewConsulting1();
-		System.out.println("ÄÁÆ®·Ñ·¯ all_job_num_avg :" + all_job_num_avg);
-		//ÃÑ Á÷Àå ÀÎ±¸¼ö Æò±Õ
+		System.out.println("ï¿½ï¿½Æ®ï¿½Ñ·ï¿½ all_job_num_avg :" + all_job_num_avg);
+		//ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("changeCodeName", changeCodeName);
@@ -162,4 +165,27 @@ public class mainController {
 		return mav;
 	}
 
+	@RequestMapping(value="/map")
+	public String mapStreet() {
+		return "map";
+	}
+	
+	
+	@RequestMapping(value="/searchreport") 
+	public String searchStreet() { 
+		return "searchReport"; 
+	}
+	
+	
+	@RequestMapping(value="/report")
+	public ModelAndView report(salesVO vo) {
+		//System.out.println(vo);
+		long money = consultingViewDAO.sales_1Area1(vo);	
+		ModelAndView mav = new ModelAndView();
+		DecimalFormat formatter = new DecimalFormat("###,###");
+		//System.out.println(formatter.format(money));
+		mav.addObject("list", formatter.format(money));
+		mav.setViewName("report");
+		return mav;
+	}
 }

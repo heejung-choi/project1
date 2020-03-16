@@ -192,7 +192,6 @@ border: 1px solid #4867e1;
 </style>
 </head>
 <body>
-
    <!-- 0311 jung main page 메뉴막대 부분, 한섹션식 스크롤 되도록 설정 -->
    <nav class="navbar navbar-default navbar-fixed-top">
       <div class="navbar-header">
@@ -208,21 +207,47 @@ border: 1px solid #4867e1;
       </div>
       <div id="color-change">
       <div class="navbar-collapse collapse">     
-      <a href="http://localhost:8000/backstreet/main" class="navbar-brand"><img src="resources/images/blacklogo.png" width="30%"  ></a>            
+      <a href="http://localhost:8000/backstreet/main" class="navbar-brand"><img src="resources/images/blacklogo.png"  width="30%" ></a>            
 	<br>
       <ul class="nav navbar-nav" id="mainlist">      
-      <li><a href="#"><span class="mainspan"> 사용가이드</span></a></li>
-      <li><a href="#"><span class="mainspan"> 골목상권 분석</span></a></li>
-      <li><a href="#"><span class="mainspan"> 창업 컨설팅</span></a></li>
-      <li><a href="#"><span class="mainspan"> 트랜드</span></a></li>
-      <li><a href="/backstreet/boardmain"><span class="mainspan">고객센터</span></a></li>
-      <li id="in"><a href="#"><span class="mainspan">  로그인</span></a></li>
-   
+      <li><a href="http://localhost:8000/backstreet/intro"><span class="mainspan"> 사용가이드</span></a></li>
+      <li><a href="http://localhost:8000/backstreet/map"><span class="mainspan"> 골목상권 분석</span></a></li>
+      <li><a href="http://localhost:8000/backstreet/consulting"><span class="mainspan"> 창업 컨설팅</span></a></li>
+      <li><a href="http://localhost:8000/backstreet/trands"><span class="mainspan"> 트랜드</span></a></li>
+      <li><a href="http://localhost:8000/backstreet/boardmain"><span class="mainspan">고객센터</span></a></li>
+       <c:if test="${requestScope.code eq null}">
+	<li id="in"><a href="http://localhost:8000/backstreet/loginView"><span class="mainspan">로그인</span></a></li>
+	</c:if>
+	<c:if test="${requestScope.code ne null}">
+	<li id="in"><a href="http://localhost:8000/backstreet/logout?accessToken=${requestScope.accessToken}"><span class="mainspan">로그아웃</span></a></li>
+	</c:if>
       </ul>
       </div>
-      </div>     
+      </div>
    </nav> 
-      <br><br><br><br><br><br><br>
+         <script src="resources/js/jquery-2.2.4.min.js"></script>
+      <script src="resources/js/bootstrap.min.js"></script>
+      <script src="resources/css/jquery.fullpage.js"></script>
+
+      <script>
+         $(document).ready(function() {
+            $("#fullpage").fullpage();
+         });
+      </script>
+
+
+
+      <script src="resources/js/jquery-2.2.4.min.js"></script>
+      <script src="resources/js/jquery.vgrid.min.js"></script>
+      <script>
+         $('#container').vgrid({
+            time : 400,
+            delay : 30,
+            wait : 500
+         });
+      </script>
+   <br><br><br><br><br><br><br>
+   
       
  <div id="all">
 <h4>자주하는 질문</h4> 

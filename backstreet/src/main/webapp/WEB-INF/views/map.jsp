@@ -1,10 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <meta name="viewport"
    content="width=device-width, initial-scale=1.0, user-scaclable=no">
 <title>김세정의 골목상권</title>
@@ -14,7 +13,14 @@
 <link rel="stylesheet" href="resources/css/jquery.bxslider.css">
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic+Coding:700&display=swap" rel="stylesheet">
 <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-<style>
+ <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
+   integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+   crossorigin=""/>
+<script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
+   integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
+   crossorigin=""></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=11a0af5b8b304b124286ecc7e4c2099e&libraries=clusterer"></script>
+  <style>
 
 
 body{
@@ -78,7 +84,7 @@ text-align:center;
 </style>
 </head>
 <body>
-   <!-- 0311 jung main page 메뉴막대 부분, 한섹션식 스크롤 되도록 설정 -->
+ <!-- 0311 jung main page 메뉴막대 부분, 한섹션식 스크롤 되도록 설정 -->
    <nav class="navbar navbar-default navbar-fixed-top">
       <div class="navbar-header">
          <!-- 0311 jung 메뉴 토글 부분 -->
@@ -133,10 +139,49 @@ text-align:center;
          });
       </script>
    <br><br><br><br><br><br><br>
+<div id="map" style="width: 800px; height: 600px;"></div>
+<script>
+	var mymap = L.map('map').setView([37.535, 127.030], 12);
 
-   
-   
-  
+	L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+		maxZoom: 18,
+		attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+			'<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+			'Imagery <a href="https://www.mapbox.com/">Mapbox</a>',
+		id: 'mapbox.streets'
+	}).addTo(mymap);
+	
+	//geojson 파싱하는 부분
+	var xhr = new XMLHttpRequest();
+	xhr.onload =  function() { 
+		console.log(xhr.status)
+		if(xhr.status == 200) {
+			var str = xhr.responseText;
+			var data = JSON.parse(str);
+			//console.log(data)
+			//console.log("1번 상권 코드명 : "+data.features[0].properties.area_id)
+			//console.log("1번 상권 이름 : "+data.features[0].properties.area_coname)
+			//console.log("1번 설명 : "+data.features[0].properties.description)
+			//console.log(data.features.length)
+			for(i=0;i<data.features.length;i++){
+				var lat = data.features[i].properties.latitude;
+				var lng = data.features[i].properties.longitude;
+				var areaId = data.features[i].properties.area_id;
+				var area = data.features[i].properties.area_coname;
+				var desc = data.features[i].properties.description;
+				
+				L.marker([lat,lng]).addTo(mymap)
+				.bindPopup('<h3>'+area+'</h3>'+desc+'<br>'+'<a href="/backstreet/searchreport?area_id='+areaId+'&area_coname='+area+'" target="_self">자세한 내용 확인</a>').openPopup();
+			}
+			
+		}
+ 	 };
+    xhr.open("GET", "../backstreet/resources/area_for_json.geojson", true);
+	xhr.send();   
+	
+</script>
+
+
 
 </body>
 </html>

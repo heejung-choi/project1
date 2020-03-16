@@ -4,9 +4,16 @@ public class salesVO {
 	private int q_id;
 	private int area_id;
 	private String serv_id;
-	// °øÅë ÄÃ·³
+	// ê³µí†µ ì»¬ëŸ¼
 	
-	private int month_sal_money;
+	public String getServ_id() {
+		return serv_id;
+	}
+	public void setServ_id(String serv_id) {
+		this.serv_id = serv_id;
+	}
+	private long month_sal_money;
+
 	private int month_sal_num;
 	private int wday_sal_money;
 	private int wkend_sal_money;
@@ -47,16 +54,11 @@ public class salesVO {
 	public void setArea_id(int area_id) {
 		this.area_id = area_id;
 	}
-	public String getServ_id() {
-		return serv_id;
-	}
-	public void setServ_id(String serv_id) {
-		this.serv_id = serv_id;
-	}
-	public int getMonth_sal_money() {
+
+	public long getMonth_sal_money() {
 		return month_sal_money;
 	}
-	public void setMonth_sal_money(int month_sal_money) {
+	public void setMonth_sal_money(long month_sal_money) {
 		this.month_sal_money = month_sal_money;
 	}
 	public int getMonth_sal_num() {

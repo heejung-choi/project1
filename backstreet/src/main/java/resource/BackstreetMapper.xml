@@ -54,9 +54,11 @@
  	</select>
  <!-- View 끝 -->
  	
- 	
- 	
- 	
+ <!-- 세호형스 -->
+ 	 	<select id="sales_1Area1"  resultType="_long">
+ 		select month_sal_money from sales_1 where area_id= #{area_id} and serv_id=#{serv_id} and q_id=2
+ 	</select>
+ <!-- 새호형스끝 -->
 </mapper>
 
 
