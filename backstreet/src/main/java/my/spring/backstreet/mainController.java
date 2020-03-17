@@ -8,13 +8,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import dao.areaViewDAO;
 import dao.consultingViewDAO;
 import service.getConsultingSearchResult;
 import service.getLoginAccessToken;
 import service.getLogoutUserId;
 import service.getTrandsSearchResult;
-import vo.changeVO;
+import vo.areaVO;
 import vo.salesVO;
+import vo.serviceVO;
+import vo.storeVO;
 
 
 @Controller
@@ -34,6 +37,10 @@ public class mainController {
 	
 	@Autowired
 	private consultingViewDAO consultingViewDAO;
+	
+	@Autowired
+	private areaViewDAO areaViewDAO;
+	
 	
 	@RequestMapping(value="/test")
 	public String testz() {
@@ -82,7 +89,7 @@ public class mainController {
 	@RequestMapping(value="/trandsSearch")
 	public ModelAndView trandsSearch(@RequestParam("query") String query) throws Exception {
 		ModelAndView mav = new ModelAndView();
-		String[] result = kakaoTrandsSearch.getTrands(query);
+		String[][] result = kakaoTrandsSearch.getTrands(query);
 		mav.addObject("json",result);
 		mav.setViewName("trands");
 		return mav;
@@ -150,21 +157,98 @@ public class mainController {
 		System.out.println("��Ʈ�ѷ� all_job_num_avg :" + all_job_num_avg);
 		//�� ���� �α��� ���
 		
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("changeCodeName", changeCodeName);
-		mav.addObject("areaCodeName", areaCodeName);
-		mav.addObject("change_id", change_id);
-		mav.addObject("serviceCodeName", serviceCodeName);
-		mav.addObject("oper_month", oper_month);
-		mav.addObject("close_month", close_month);
-		mav.addObject("oper_month_avg", oper_month_avg);
-		mav.addObject("close_month_avg", close_month_avg);
-		mav.addObject("all_job_num",all_job_num);
-		mav.addObject("all_job_num_avg",all_job_num_avg);
-		mav.setViewName("consultingView");
-		return mav;
-	}
+	    
+	      int all_living_num = consultingViewDAO.livingPopulationConsulting1(1001495);
+	      System.out.println("컨트롤러 all_living_num :" + all_living_num);
+	      
+	      int all_living_num_avg = consultingViewDAO.livingPopulationViewConsulting1();
+	      System.out.println("컨트롤러 all_living_num_avg :" +  all_living_num_avg);
+	      
+	      int apart_num = consultingViewDAO.apartmentConsulting1(1001495);
+	      System.out.println("컨트롤러 apart_num :" +  apart_num);
+	      
+	      int apart_num_avg = consultingViewDAO.apartmentViewConsulting1();
+	      System.out.println("컨트롤러 apart_num_avg :" +  apart_num_avg);
+	      
 
+	      
+	      storeVO vo = new storeVO();
+	      
+	      int store_num = consultingViewDAO.storeConsulting1(vo);
+	      System.out.println("컨트롤러 store_num :" +  store_num);
+	      
+	      int sim_store_num = consultingViewDAO.storeConsulting2(vo);
+	      System.out.println("sim_store_num :" +  sim_store_num);
+	      
+	      int start_rate = consultingViewDAO.storeConsulting3(vo);
+	      System.out.println("컨트롤러 start_rate :" +  start_rate);
+	      
+	      int start_store_num = consultingViewDAO.storeConsulting4(vo);
+	      System.out.println("컨트롤러 start_store_num :" +  start_store_num);
+	      
+	      int close_rate = consultingViewDAO.storeConsulting5(vo);
+	      System.out.println("컨트롤러 close_rate :" +  close_rate);
+	      
+	      int close_store_num = consultingViewDAO.storeConsulting6(vo);
+	      System.out.println("컨트롤러 close_store_num :" +  close_store_num);
+	      
+	      
+	      int start_rate_avg = consultingViewDAO.storeViewConsulting1();
+	      System.out.println("컨트롤러 start_rate_avg :" +  start_rate_avg);
+	      
+	      int start_store_num_avg = consultingViewDAO.storeViewConsulting2();
+	      System.out.println("컨트롤러 start_store_num_avg :" +  start_store_num_avg);
+	      
+	      int close_rate_avg = consultingViewDAO.storeViewConsulting3();
+	      System.out.println("컨트롤러 close_rate_avg :" +  close_rate_avg);
+	      
+	      int close_store_num_avg = consultingViewDAO.storeViewConsulting4();
+	      System.out.println("컨트롤러 close_store_num_avg :" +  close_store_num_avg);
+	      
+	      ModelAndView mav = new ModelAndView();
+	      mav.addObject("changeCodeName", changeCodeName);
+	      mav.addObject("areaCodeName", areaCodeName);
+	      mav.addObject("change_id", change_id);
+	      mav.addObject("serviceCodeName", serviceCodeName);
+	      mav.addObject("oper_month", oper_month);
+	      mav.addObject("close_month", close_month);
+	      mav.addObject("oper_month_avg", oper_month_avg);
+	      mav.addObject("close_month_avg", close_month_avg);
+	      mav.addObject("all_job_num",all_job_num);
+	      mav.addObject("all_job_num_avg",all_job_num_avg);
+	      mav.addObject("all_living_num",all_living_num);
+	      mav.addObject("all_living_num_avg",all_living_num_avg);
+	      mav.addObject("apart_num",apart_num);
+	      mav.addObject("apart_num_avg",apart_num_avg);
+	      
+	      mav.addObject("store_num", store_num);
+	      mav.addObject("sim_store_num", sim_store_num);
+	      mav.addObject("start_rate", start_rate);
+	      mav.addObject("start_store_num", start_store_num);
+	      mav.addObject("close_rate", close_rate);
+	      mav.addObject("close_store_num", close_store_num);
+	      
+	      
+	      mav.addObject("start_rate_avg", start_rate_avg);
+	      mav.addObject("start_store_num_avg", start_store_num_avg);
+	      mav.addObject("close_rate_avg", close_rate_avg);
+	      mav.addObject("close_store_num_avg", close_store_num_avg);
+	      
+	      mav.setViewName("consultingView");
+	      return mav;}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+//세호
 	@RequestMapping(value="/map")
 	public String mapStreet() {
 		return "map";
@@ -177,15 +261,56 @@ public class mainController {
 	}
 	
 	
+	//1000단위 표시해주는 포맷 선언
+	DecimalFormat formatter = new DecimalFormat("###,###");
+	
 	@RequestMapping(value="/report")
-	public ModelAndView report(salesVO vo) {
+	public ModelAndView report(salesVO vo, areaVO avo, serviceVO svo) {
 		//System.out.println(vo);
-		long money = consultingViewDAO.sales_1Area1(vo);	
+		salesVO vo1 = areaViewDAO.sales_1Area1(vo);
+		areaVO vo2 = areaViewDAO.area_Area1(avo);
+		serviceVO vo3 = areaViewDAO.service_Area1(svo);
 		ModelAndView mav = new ModelAndView();
-		DecimalFormat formatter = new DecimalFormat("###,###");
-		//System.out.println(formatter.format(money));
-		mav.addObject("list", formatter.format(money));
+		//System.out.println("vo1 머니머니: "+so1.getMonth_sal_money());
+		//System.out.println("vo2 : "+vo2);
+		//System.out.println("vo3 : "+vo3);
+		
+		//area table
+		mav.addObject("area_coname", vo2.getArea_coname());
+		//service table 
+		mav.addObject("serv_coname", vo3.getServ_coname());
+		if(vo1!=null) {
+		//sales_1 table
+		mav.addObject("month_money", formatter.format(vo1.getMonth_sal_money()));
+		mav.addObject("month_num", formatter.format(vo1.getMonth_sal_num()));
+		mav.addObject("wday_money", formatter.format(vo1.getWday_sal_money()));
+		mav.addObject("wkend_money", formatter.format(vo1.getWkend_sal_money()));
+		mav.addObject("m_money", formatter.format(vo1.getM_sal_money()));
+		mav.addObject("w_money", formatter.format(vo1.getW_sal_money()));
+		//sales_2 table
+		vo1 = areaViewDAO.sales_2Area1(vo);
+		mav.addObject("money_10", formatter.format(vo1.getSal_money_10()));
+		mav.addObject("money_20", formatter.format(vo1.getSal_money_20()));
+		mav.addObject("money_30", formatter.format(vo1.getSal_money_30()));
+		mav.addObject("money_40", formatter.format(vo1.getSal_money_40()));
+		mav.addObject("money_50", formatter.format(vo1.getSal_money_50()));
+		mav.addObject("money_60", formatter.format(vo1.getSal_money_60()));
+		//sales_3 table
+		vo1 = areaViewDAO.sales_3Area1(vo);
+		mav.addObject("wday_num", formatter.format(vo1.getWday_sal_num()));
+		mav.addObject("wkend_num", formatter.format(vo1.getWkend_sal_num()));
+		mav.addObject("m_num", formatter.format(vo1.getM_sal_num()));
+		mav.addObject("w_num", formatter.format(vo1.getW_sal_num()));
 		mav.setViewName("report");
+		//sales_4 table
+		vo1 = areaViewDAO.sales_4Area1(vo);
+		mav.addObject("num_10", formatter.format(vo1.getSal_num_10()));
+		mav.addObject("num_20", formatter.format(vo1.getSal_num_20()));
+		mav.addObject("num_30", formatter.format(vo1.getSal_num_30()));
+		mav.addObject("num_40", formatter.format(vo1.getSal_num_40()));
+		mav.addObject("num_50", formatter.format(vo1.getSal_num_50()));
+		mav.addObject("num_60", formatter.format(vo1.getSal_num_60()));
+		}
 		return mav;
 	}
 }

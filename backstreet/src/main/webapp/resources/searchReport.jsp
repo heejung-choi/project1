@@ -5,12 +5,6 @@
 <html>
 <head>
 <style>
-@import url('https://fonts.googleapis.com/css?family=Poor+Story&display=swap');
-
-body{
-/* font-family: 'Nanum Gothic Coding', monospace; */
-font-family: 'Poor Story', cursive;
-}
 a.button {  
       text-decoration: none;
       font-size:2rem;
@@ -54,7 +48,7 @@ a.button {
 		<a href="#" class="button" onclick="location.href='/backstreet/report?area_id=<%=areaId %>&serv_id=CS200016'">미용실</a>
 		<br>
 		<a href="#" class="button" onclick="location.href='/backstreet/report?area_id=<%=areaId %>&serv_id=CS300002'">편의점</a>
-		<a href="#" class="button" onclick="location.href='/backstreet/report?area_id=<%=areaId %>&serv_id=CS300007'">의류</a>
+		<a href="#" class="button" onclick="location.href='/backstreet/report?area_id=<%=areaId %>&serv_id=CS300007'">의류점</a>
 		<br>
 		<a href="#" class="button" onclick="location.href='/backstreet/report?area_id=<%=areaId %>&serv_id=CS300008'">패션용품</a>
 		<a href="#" class="button" onclick="location.href='/backstreet/report?area_id=<%=areaId %>&serv_id=CS300011'">화장품</a>

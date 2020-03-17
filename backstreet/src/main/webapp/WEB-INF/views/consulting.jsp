@@ -22,11 +22,12 @@
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic+Coding:700&display=swap" rel="stylesheet">
 <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 <style>
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothiccoding.css);
 
-
-body{
-font-family: 'Nanum Gothic Coding', monospace;
+body,h1,h2,h3,h4,h5,table,button{
+ font-family: 'Nanum Gothic Coding', monospace;
 }
+
 #color-change {
    background-color: white;  /* 위에 배너 컬러 */
    text-align:center;
@@ -82,11 +83,70 @@ ul{
 text-align:center;
 }
 
+input[type=text] {
+  width: 40%;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: #eee;
+  background-image: url('searchicon.png');
+  background-position: 10px 10px; 
+  background-repeat: no-repeat;
+  padding: 12px 20px 12px 40px;
+  -webkit-transition: width 0.4s ease-in-out;
+  transition: width 0.4s ease-in-out;
+text-align: center;
+  border-radius: 45px;
+}
+
+input[type=text]:focus {
+  width: 60%;
+}
+
+
+
+.d_submit {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: grey;
+}
+/* 0317 검색버튼 효과 */
+.t_submit{
+  width: 100px;
+  height: 45px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  color: #000;
+  background-color: #fff;
+  border: none;
+  border-radius: 45px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+  }
+/* 0317 jung 검색버튼 호버 효과 */
+.t_submit:hover {
+  background-color: #4867e1;
+  box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+  color: #fff;
+  transform: translateY(-7px);
+}
+
+#mapid{
+padding: 10%;
+}
 </style>
 </head>
 <body>
  <!-- 0311 jung main page 메뉴막대 부분, 한섹션식 스크롤 되도록 설정 -->
-   <nav class="navbar navbar-default navbar-fixed-top">
+   <nav class="navbar-default navbar-fixed-top">
       <div class="navbar-header">
          <!-- 0311 jung 메뉴 토글 부분 -->
          <button type="button" class="navbar-toggle" data-toggle="collapse"
@@ -101,19 +161,19 @@ text-align:center;
       <div id="color-change">
       <div class="navbar-collapse collapse">     
       <a href="http://localhost:8000/backstreet/main" class="navbar-brand"><img src="resources/images/blacklogo.png"  width="30%" ></a>            
-	<br>
+   <br>
       <ul class="nav navbar-nav" id="mainlist">      
       <li><a href="http://localhost:8000/backstreet/intro"><span class="mainspan"> 사용가이드</span></a></li>
       <li><a href="http://localhost:8000/backstreet/map"><span class="mainspan"> 골목상권 분석</span></a></li>
-      <li><a href="http://localhost:8000/backstreet/consulting"><span class="mainspan"> 창업 컨설팅</span></a></li>
+      <li><a href="http://localhost:8000/backstreet/consulting"><span class="mainspan"> 내 상권 찾기</span></a></li>
       <li><a href="http://localhost:8000/backstreet/trands"><span class="mainspan"> 트랜드</span></a></li>
       <li><a href="http://localhost:8000/backstreet/boardmain"><span class="mainspan">고객센터</span></a></li>
        <c:if test="${requestScope.code eq null}">
-	<li id="in"><a href="http://localhost:8000/backstreet/loginView"><span class="mainspan">로그인</span></a></li>
-	</c:if>
-	<c:if test="${requestScope.code ne null}">
-	<li id="in"><a href="http://localhost:8000/backstreet/logout?accessToken=${requestScope.accessToken}"><span class="mainspan">로그아웃</span></a></li>
-	</c:if>
+   <li id="in"><a href="http://localhost:8000/backstreet/loginView"><span class="mainspan">로그인</span></a></li>
+   </c:if>
+   <c:if test="${requestScope.code ne null}">
+   <li id="in"><a href="http://localhost:8000/backstreet/logout?accessToken=${requestScope.accessToken}"><span class="mainspan">로그아웃</span></a></li>
+   </c:if>
       </ul>
       </div>
       </div>
@@ -140,46 +200,46 @@ text-align:center;
          });
       </script>
    <br><br><br><br><br><br><br>
-<!-- 0309 kim 컨설팅페이지 헤더 영역 정의 -->
-
-
-<!-- 0309 kim 컨설팅페이지 헤더 영역 정의 끝 -->
-
-<!-- 0309 kim 컨설팅페이지 컨텐츠 영역 정의 -->
-<form method="get" action="http://localhost:8000/backstreet/consultingSearch">
-입력란 : <input type="text" placeholder="검색어를 입력하새오" name="query">
-<button>제출</button>
+<form action="http://localhost:8000/backstreet/consultingSearch"
+	method="GET">				
+	<div class="d_submit">
+	<input type="text" placeholder="주소를 입력하세요." name="query"> 
+	&nbsp;&nbsp;
+	<input type="submit" value="검색" class="t_submit">
+</div>
 </form>
-<!-- 0309 kim 컨설팅페이지 컨텐츠 영역 정의 끝 -->
+
+<br>
 
 <c:if test="${requestScope.json ne null}">
-하이루
 
-<div id="mapid" style="width: 900px; height: 600px;"></div>
+
+<div id="mapid" style="width: 100%; height: 600px; text-align:center">  </div>
 <script>
 //37.6931632:126.7650706
 
 var mymap;
-	if(mymap)
-		mymap.remove(); // 지운다음 맵객체 생성.
-	mymap = L.map('mapid').setView([${requestScope.json[1]},${requestScope.json[0]}],16)
-	L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
-		maxZoom: 18,
-		attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
-			'<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-			'Imagery <a href="https://www.mapbox.com/">Mapbox</a>',
-		id: 'mapbox.streets'
-	}).addTo(mymap);
-	
+   if(mymap)
+      mymap.remove(); // 지운다음 맵객체 생성.
+   mymap = L.map('mapid').setView([${requestScope.json[1]},${requestScope.json[0]}],16)
+   L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+      maxZoom: 18,
+      attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+         '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+         'Imagery <a href="https://www.mapbox.com/">Mapbox</a>',
+      id: 'mapbox.streets'
+   }).addTo(mymap);
+   
 var myIcon = L.icon({
-    iconUrl: 'http://70.12.115.176:8000/d3edu/images/브라운01.jpg',
-    iconSize: [50, 70]
+    iconUrl: 'resources/images/storeimg.png',
+    iconSize: [60, 60]
 });
-var content = "<b>"+'하이룽'+"</b> <img src='/d3edu/images/duke.png' width='20'><hr>"+"하이룽";
-	//L.marker([37.693116, ${requestScope.json[1]}], {icon: myIcon}).addTo(mymap).bindPopup(content);
-	L.marker([${requestScope.json[1]}, ${requestScope.json[0]}], {icon: myIcon}).addTo(mymap).bindPopup(content);
-	console.log(${requestScope.json[0]});
-	console.log(${requestScope.json[1]}); 
+var content = "&nbsp;&nbsp;<img src='resources/images/storeimg.png' width='20'><b>&nbsp;&nbsp;"+' 김세정의 골목상권 '+"&nbsp;&nbsp;</b><img src='resources/images/storeimg.png' width='20'>&nbsp;&nbsp;<hr>"+"고객님께서 창업하실 상권입니다. <br>성공을 기원합니다.";
+   //L.marker([37.693116, ${requestScope.json[1]}], {icon: myIcon}).addTo(mymap).bindPopup(content);
+   L.marker([${requestScope.json[1]}, ${requestScope.json[0]}], {icon: myIcon}).addTo(mymap).bindPopup(content);
+   console.log(${requestScope.json[0]});
+   console.log(${requestScope.json[1]}); 
+ 
 </script>
 </c:if>
 </body>

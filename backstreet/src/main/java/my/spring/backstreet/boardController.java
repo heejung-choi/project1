@@ -118,4 +118,6 @@ public class BoardController {
 		mav.setViewName("board");
 		return mav;
 	}
+	
+	
 }

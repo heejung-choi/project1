@@ -65,22 +65,78 @@ color : blue;
 </c:if>
 </ul>
 <hr>
-# living_population
-a 상권의 총 상주인구 수는 (living_population의 all_living_num)입니다.
-이것은 골목상권의 평균 총 상주인구 수인 (living_population_view의 all_living_num_avg) 보다 (작습니다./큽니다)
+
+<h5># living_population</h5>
+<span id="s_color">${requestScope.areaCodeName}</span> 상권의 총 상주인구 수는 <span id="s_color">${requestScope.all_living_num}</span> 입니다.
+<ul>
+<c:if test="${requestScope.all_living_num gt requestScope.all_living_num_avg}">
+<li>이것은 골목상권의 평균 총 상주인구 수인 <span id="s_color">${requestScope.all_living_num_avg}</span> 보다 큽니다.</li>
+</c:if>
+<c:if test="${requestScope.all_living_num le requestScope.all_living_num_avg}">
+<li>이것은 골목상권의 평균 총 상주인구 수인 <span id="s_color">${requestScope.all_living_num_avg}</span> 보다 작습니다.</li>
+</c:if>
+</ul>
 <hr>
-# apartment
-a 상권의 아파트 단지수는 (apartment의 apart_num)입니다.
-이것은 골목상권의 평균 총 아파트 단지 수인 (apartment_view의  apart_num_avg) 보다 (작습니다./큽니다.)
+
+<h5># apartment</h5>
+<span id="s_color">${requestScope.areaCodeName}</span> 상권의 아파트 단지수는 <span id="s_color">${requestScope.apart_num}</span>입니다.
+<ul>
+<c:if test="${requestScope.apart_num gt requestScope.apart_num_avg}">
+<li>이것은 골목상권의 평균 총 아파트 단지 수인 <span id="s_color">${requestScope.apart_num_avg}</span> 보다 큽니다.</li>
+</c:if>
+<c:if test="${requestScope.apart_num le requestScope.apart_num_avg}">
+<li>이것은 골목상권의 평균 총 아파트 단지 수인 <span id="s_color">${requestScope.apart_num_avg}</span> 보다 작습니다.</li>
+</c:if>
+</ul>
 <hr>
-# store
-1) store_num 2) sim_store_num 3) start_rate 4)start_store_num 5)close_rate 
-6) close_store_num
-a 상권의 점포수는 1) 이고, 고객님이 선택하신 업종과 유사한 업종의 점포수는 2) 입니다.
-a 상권의 개업률은 3) 이고 개업 점포 수는 4) 입니다. 
-또한 a 상권의 폐업률은 5) 이고 폐업 점포 수는 6) 입니다.
-a 상권의 개업률은 평균인 (store_view의 start_rate_avg)과 비교했을 때 (높고/낮고) 개업 점포 수는 평균인 (store_view의 start_store_num_avg)과 비교했을 때 (높습니다./낮습니다.)
-a 상권의 폐업률은 평균인 (store_view의 close_rate_avg)과 비교했을 때 (높고/낮고) 개업 점포 수는 평균인 (store_view의 close_store_num_avg)과 비교했을 때 (높습니다./낮습니다.)
+<h5># store</h5>
+<span id="s_color">${requestScope.areaCodeName}</span> 상권의 점포수는 <span id="s_color">${requestScope.store_num}</span> 이고,
+고객님이 선택하신 업종과 유사한 업종의 점포수는 <span id="s_color">${requestScope.sim_store_num}</span> 입니다.
+<span id="s_color">${requestScope.areaCodeName}</span> 상권의 개업률은 <span id="s_color">${requestScope.start_rate}</span> 이고,
+ 개업 점포 수는 <span id="s_color">${requestScope.start_store_num}</span> 입니다. 
+또한, <span id="s_color">${requestScope.areaCodeName}</span> 상권의 폐업률은 <span id="s_color">${requestScope.close_rate}</span> 이고,
+ 폐업 점포 수는 <span id="s_color">${requestScope.close_store_num}</span> 입니다.
+
+
+<c:if test="${requestScope.start_rate gt requestScope.start_rate_avg}">
+<span id="s_color">${requestScope.areaCodeName}</span> 상권의 개업률은 평균인 <span id="s_color">${requestScope.start_rate_avg}%</span>와 비교했을 때 높고,
+   <c:if test="${requestScope.store_num gt requestScope.start_store_num_avg}">
+   개업 점포 수는 평균인 <span id="s_color">${requestScope.start_store_num_avg}</span>과 비교했을 때 높습니다.
+   </c:if>
+   <c:if test="${requestScope.store_num le requestScope.start_store_num_avg}">
+   개업 점포 수는 평균인 <span id="s_color">${requestScope.start_store_num_avg}</span>과 비교했을 때 낮습니다.
+   </c:if>
+</c:if>
+
+<c:if test="${requestScope.start_rate le requestScope.start_rate_avg}">
+<span id="s_color">${requestScope.areaCodeName}</span> 상권의 개업률은 평균인 <span id="s_color">${requestScope.start_rate_avg}%</span>와 비교했을 때 낮고,
+   <c:if test="${requestScope.store_num gt requestScope.start_store_num_avg}">
+   개업 점포 수는 평균인 <span id="s_color">${requestScope.start_store_num_avg}</span>과 비교했을 때 높습니다.
+   </c:if>
+   <c:if test="${requestScope.store_num le requestScope.start_store_num_avg}">
+   개업 점포 수는 평균인 <span id="s_color">${requestScope.start_store_num_avg}</span>과 비교했을 때 낮습니다.
+   </c:if>
+</c:if>
+
+<c:if test="${requestScope.close_rate gt requestScope.close_rate_avg}">
+<span id="s_color">${requestScope.areaCodeName}</span> 상권의 폐업률은 평균인 <span id="s_color">${requestScope.close_rate_avg}%</span>와 비교했을 때 높고,
+   <c:if test="${requestScope.close_rate gt requestScope.close_rate_avg}">
+   폐업 점포 수는 평균인 <span id="s_color">${requestScope.close_rate_avg}</span>과 비교했을 때 높습니다.
+   </c:if>
+   <c:if test="${requestScope.close_rate le requestScope.close_rate_avg}">
+   폐업 점포 수는 평균인 <span id="s_color">${requestScope.close_rate_avg}</span>과 비교했을 때 낮습니다.
+   </c:if>
+</c:if>
+
+<c:if test="${requestScope.close_rate lt requestScope.close_rate_avg}">
+<span id="s_color">${requestScope.areaCodeName}</span> 상권의 폐업률은 평균인 <span id="s_color">${requestScope.close_rate_avg}%</span>와 비교했을 때 낮고,
+   <c:if test="${requestScope.close_rate gt requestScope.close_rate_avg}">
+   폐업 점포 수는 평균인 <span id="s_color">${requestScope.close_rate_avg}</span>과 비교했을 때 높습니다.
+   </c:if>
+   <c:if test="${requestScope.close_rate le requestScope.close_rate_avg}">
+   폐업 점포 수는 평균인 <span id="s_color">${requestScope.close_rate_avg}</span>과 비교했을 때 낮습니다.
+   </c:if>
+</c:if>
 <hr>
 </body>
 </html>

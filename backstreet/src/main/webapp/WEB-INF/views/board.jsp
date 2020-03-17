@@ -18,11 +18,12 @@
 <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 
 <style>
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothiccoding.css);
 
-
-body{
-font-family: 'Nanum Gothic Coding', monospace;
+body,h1,h2,h3,h4,h5,table,button{
+ font-family: 'Nanum Gothic Coding', monospace;
 }
+
 #color-change {
    background-color: white;  /* 위에 배너 컬러 */
    text-align:center;
@@ -33,7 +34,7 @@ font-family: 'Nanum Gothic Coding', monospace;
    font-size: 1.2em;
 }
 
-.mainspan:hover {
+ {
    color: gray;
 }
 
@@ -189,11 +190,29 @@ border: 1px solid #4867e1;
 	margin-botton: -3px;
 
 }
+
+.b_search{
+  display: inline-block;
+  padding: 7px 15px;
+  font-size: 10px;
+  cursor: pointer;
+  text-align: center;
+  outline: none;
+  color: #333333;
+  background-color: white;
+  border: 1px solid #333333;
+  border-radius: 5px;
+  box-shadow: 0 2px #999;
+  font-size :1em;
+}
+.b_search:hover {
+border: 1px solid #4867e1;
+}
 </style>
 </head>
 <body>
    <!-- 0311 jung main page 메뉴막대 부분, 한섹션식 스크롤 되도록 설정 -->
-   <nav class="navbar navbar-default navbar-fixed-top">
+   <nav class="navbar-default navbar-fixed-top">
       <div class="navbar-header">
          <!-- 0311 jung 메뉴 토글 부분 -->
          <button type="button" class="navbar-toggle" data-toggle="collapse"
@@ -212,7 +231,7 @@ border: 1px solid #4867e1;
       <ul class="nav navbar-nav" id="mainlist">      
       <li><a href="http://localhost:8000/backstreet/intro"><span class="mainspan"> 사용가이드</span></a></li>
       <li><a href="http://localhost:8000/backstreet/map"><span class="mainspan"> 골목상권 분석</span></a></li>
-      <li><a href="http://localhost:8000/backstreet/consulting"><span class="mainspan"> 창업 컨설팅</span></a></li>
+      <li><a href="http://localhost:8000/backstreet/consulting"><span class="mainspan"> 내 상권 찾기</span></a></li>
       <li><a href="http://localhost:8000/backstreet/trands"><span class="mainspan"> 트랜드</span></a></li>
       <li><a href="http://localhost:8000/backstreet/boardmain"><span class="mainspan">고객센터</span></a></li>
        <c:if test="${requestScope.code eq null}">
@@ -250,13 +269,13 @@ border: 1px solid #4867e1;
    
       
  <div id="all">
-<h4>자주하는 질문</h4> 
-<button class="button" type="button" onclick="location.href='http://localhost:8000/backstreet/search?action=search&searchType=title&keyword=환불'">환불</button>
-<button class="button" type="button" onclick="location.href='http://localhost:8000/backstreet/search?action=search&searchType=title&keyword=유료'">유료 결제</button>
-<button class="button" type="button" onclick="location.href='http://localhost:8000/backstreet/search?action=search&searchType=title&keyword=홈페이지'">홈페이지 사용</button>
-<button class="button" type="button" onclick="location.href='http://localhost:8000/backstreet/search?action=search&searchType=title&keyword=컨설팅'">골목상권 컨설팅</button>
-<button class="button" type="button" onclick="location.href='http://localhost:8000/backstreet/search?action=search&searchType=title&keyword=골목상권'">골목상권 분석</button>
-
+<h3><img src="resources/images/q&a.svg" style="width: 30px">&nbsp;자주하는 질문</h3>
+<br>
+<button class="b_search" type="button" onclick="location.href='http://localhost:8000/backstreet/search?action=search&searchType=title&keyword=환불'">#환불</button>
+<button class="b_search"  type="button" onclick="location.href='http://localhost:8000/backstreet/search?action=search&searchType=title&keyword=유료'">#유료 결제</button>
+<button class="b_search"  type="button" onclick="location.href='http://localhost:8000/backstreet/search?action=search&searchType=title&keyword=홈페이지'">#홈페이지 사용</button>
+<button class="b_search"  type="button" onclick="location.href='http://localhost:8000/backstreet/search?action=search&searchType=title&keyword=컨설팅'">#골목상권 컨설팅</button>
+<button class="b_search"  type="button" onclick="location.href='http://localhost:8000/backstreet/search?action=search&searchType=title&keyword=골목상권'">#골목상권 분석</button>
 <br>
 <br>
 <div id="search">

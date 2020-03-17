@@ -22,10 +22,15 @@
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=11a0af5b8b304b124286ecc7e4c2099e&libraries=clusterer"></script>
   <style>
 
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothiccoding.css);
 
-body{
-font-family: 'Nanum Gothic Coding', monospace;
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothiccoding.css);
+
+body,h1,h2,h3,h4,h5,table,button{
+ font-family: 'Nanum Gothic Coding', monospace;
 }
+
+
 #color-change {
    background-color: white;  /* 위에 배너 컬러 */
    text-align:center;
@@ -107,12 +112,7 @@ text-align:center;
       <li><a href="http://localhost:8000/backstreet/consulting"><span class="mainspan"> 창업 컨설팅</span></a></li>
       <li><a href="http://localhost:8000/backstreet/trands"><span class="mainspan"> 트랜드</span></a></li>
       <li><a href="http://localhost:8000/backstreet/boardmain"><span class="mainspan">고객센터</span></a></li>
-       <c:if test="${requestScope.code eq null}">
-	<li id="in"><a href="http://localhost:8000/backstreet/loginView"><span class="mainspan">로그인</span></a></li>
-	</c:if>
-	<c:if test="${requestScope.code ne null}">
-	<li id="in"><a href="http://localhost:8000/backstreet/logout?accessToken=${requestScope.accessToken}"><span class="mainspan">로그아웃</span></a></li>
-	</c:if>
+	<li><a href="http://localhost:8000/backstreet/loginView"><span class="mainspan">로그인</span></a></li>
       </ul>
       </div>
       </div>
