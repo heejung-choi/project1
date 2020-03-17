@@ -89,6 +89,15 @@ from sales_1;
 
 
 
+
+
+create or replace force view living_population_view as
+select avg(all_living_num) as all_living_num_avg
+
+from living_population;
+
+
+
 # 골목상권 분석 데이터
 
 <골목상권 분석 정보>
