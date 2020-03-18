@@ -139,9 +139,9 @@ text-align:center;
          });
       </script>
    <br><br><br><br><br><br><br>
-<div id="map" style="width: 800px; height: 600px;"></div>
+<div id="map" style="width: 100%; height: 600px;"></div>
 <script>
-	var mymap = L.map('map').setView([37.535, 127.030], 12);
+	var mymap = L.map('map').setView([37.5205636, 127], 12);
 
 	L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
 		maxZoom: 18,
@@ -176,7 +176,7 @@ text-align:center;
 			
 		}
  	 };
-    xhr.open("GET", "../backstreet/resources/area_for_json.geojson", true);
+    xhr.open("GET", "../backstreet/resources/area_for_json1.geojson", true);
 	xhr.send();   
 	
 </script>

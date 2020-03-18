@@ -146,19 +146,20 @@ html, body {
   transform: translateY(-7px);
 }
 
-.b_search{
+  .b_search{
   display: inline-block;
   padding: 7px 15px;
   font-size: 10px;
   cursor: pointer;
   text-align: center;
   outline: none;
-  color: #333333;
+  color: black;
   background-color: white;
   border: 1px solid #333333;
   border-radius: 5px;
   box-shadow: 0 2px #999;
   font-size :1em;
+  font-weight: bold;
 }
 .b_search:hover {
 border: 1px solid #4867e1;

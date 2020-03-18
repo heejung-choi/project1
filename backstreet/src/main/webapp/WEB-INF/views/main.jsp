@@ -227,10 +227,11 @@ input[type=text]:focus {
 
 
  <!--     0317 jung  아이콘 div -->
-    <div class="wrapper_icon" onclick="window.open('http://localhost:8000/backstreet/resources/howmuch.html','howmuch','width=800,height=500,location=no,status=no,scrollbars=yes');">
+    <div class="wrapper_icon">
 <!--     0317 jung 첫번째 아이콘 -->
 <!--      <a href="http://localhost:8000/backstreet/resources/howmuch.html" target="_blank"> -->
-     <div class="items">
+     <div class="items"
+      onclick="window.open('http://localhost:8000/backstreet/resources/howmuch.html','howmuch','width=800,height=500,location=no,status=no,scrollbars=yes');">
      <img  src="resources/images/payment.svg"width='80%'><br><br>
      <b>컨설팅 비용문의</b>
    	 </div>

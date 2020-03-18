@@ -204,6 +204,7 @@ border: 1px solid #4867e1;
   border-radius: 5px;
   box-shadow: 0 2px #999;
   font-size :1em;
+  
 }
 .b_search:hover {
 border: 1px solid #4867e1;
